@@ -65,7 +65,6 @@ function handleSubmit(event) {
 }
 
 function showPositionWeather(position) {
-  debugger;
   latitude = position.coords.latitude;
   longitude = position.coords.longitude;
   let apiKey = `c49ac0d4966a15e494a3ad92063a514f`;
