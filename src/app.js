@@ -84,4 +84,4 @@ searchLocation.addEventListener("submit", handleSubmit);
 let currentPosition = document.querySelector("#search-current-position");
 currentPosition.addEventListener("click", searcCurrentPosition);
 
-searchCity("Nairobi");
+searchCity("Siaya");
