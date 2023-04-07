@@ -34,7 +34,7 @@ function showTemperature(response) {
   cityInput.innerHTML = response.data.name;
 
   let degreesTemperature = document.querySelector("#current-degrees-temp");
-  temperature = Math.round(response.data.main.temp);
+  let temperature = Math.round(response.data.main.temp);
   degreesTemperature.innerHTML = temperature;
 
   let weatherDescription = document.querySelector("#weather-description");
@@ -42,11 +42,11 @@ function showTemperature(response) {
   weatherDescription.innerHTML = description;
 
   let weatherHumidity = document.querySelector("#weather-humidity");
-  humidity = response.data.main.humidity;
+  let humidity = response.data.main.humidity;
   weatherHumidity.innerHTML = `Humidy: ${humidity}%`;
 
   let weatherWind = document.querySelector("#weather-wind");
-  wind = response.data.wind.speed;
+  let wind = response.data.wind.speed;
   weatherWind.innerHTML = `Wind: ${wind}km/h`;
 }
 
@@ -65,8 +65,8 @@ function handleSubmit(event) {
 }
 
 function showPositionWeather(position) {
-  latitude = position.coords.latitude;
-  longitude = position.coords.longitude;
+  let latitude = position.coords.latitude;
+  let longitude = position.coords.longitude;
   let apiKey = `c49ac0d4966a15e494a3ad92063a514f`;
   let apiEndpoint = `https://api.openweathermap.org/data/2.5/weather?`;
   let apiUrl = `${apiEndpoint}lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=metric`;
