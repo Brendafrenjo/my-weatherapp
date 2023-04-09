@@ -43,6 +43,13 @@ function showTemperature(response) {
 
   let currentTime = document.querySelector("#current-time");
   currentTime.innerHTML = formattedTime(response.data.dt * 1000);
+
+  let iconElement = document.querySelector("#icon");
+  iconElement.setAttribute(
+    "src",
+    `https://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
+  );
+  iconElement.setAttribute("alt", response.data.weather[0].description);
 }
 
 function searchCity(city) {
