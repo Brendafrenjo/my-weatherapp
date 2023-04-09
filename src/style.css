@@ -9,7 +9,7 @@ li {
 }
 
 h1 {
-  font-weight: 400;
+  font-weight: 500;
   font-size: 24px;
   line-height: 28px;
   margin-bottom: 0;
@@ -114,12 +114,17 @@ small {
   bottom: -8px;
 }
 
-.fahrenheit {
+.weather-temperature .active {
+  color: black;
+  cursor: default;
+}
+
+.weather-temperature .active:hover {
   text-decoration: none;
 }
 
-#degrees-temp,
-#farehn-temp {
+#celsius-link,
+#fahrenheit-link {
   text-decoration: none;
 }
 

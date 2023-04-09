@@ -27,24 +27,21 @@ function formattedTime(timestamp) {
 
 function showTemperature(response) {
   let cityInput = document.querySelector("#search-city");
-  cityInput.innerHTML = response.data.name;
-
   let degreesTemperature = document.querySelector("#current-degrees-temp");
-  degreesTemperature.innerHTML = Math.round(response.data.main.temp);
-
   let weatherDescription = document.querySelector("#weather-description");
-  weatherDescription.innerHTML = response.data.weather[0].description;
-
   let weatherHumidity = document.querySelector("#weather-humidity");
-  weatherHumidity.innerHTML = `Humidy: ${response.data.main.humidity}%`;
-
   let weatherWind = document.querySelector("#weather-wind");
-  weatherWind.innerHTML = `Wind: ${Math.round(response.data.wind.speed)}km/h`;
-
   let currentTime = document.querySelector("#current-time");
-  currentTime.innerHTML = formattedTime(response.data.dt * 1000);
-
   let iconElement = document.querySelector("#icon");
+
+  celsiusTemperature = response.data.main.temp;
+
+  cityInput.innerHTML = response.data.name;
+  degreesTemperature.innerHTML = Math.round(response.data.main.temp);
+  weatherDescription.innerHTML = response.data.weather[0].description;
+  weatherHumidity.innerHTML = `Humidity: ${response.data.main.humidity}%`;
+  weatherWind.innerHTML = `Wind: ${Math.round(response.data.wind.speed)}km/h`;
+  currentTime.innerHTML = formattedTime(response.data.dt * 1000);
   iconElement.setAttribute(
     "src",
     `https://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
@@ -80,10 +77,35 @@ function searcCurrentPosition(event) {
   navigator.geolocation.getCurrentPosition(showPositionWeather);
 }
 
+function showfahrenheitTemp(event) {
+  event.preventDefault();
+  fahrenheitLink.classList.add("active");
+  celsiusLink.classList.remove("active");
+  let celsiusElement = document.querySelector("#current-degrees-temp");
+  let fahrenheitTemperature = (celsiusTemperature * 9) / 5 + 32;
+  celsiusElement.innerHTML = Math.round(fahrenheitTemperature);
+}
+
+function showCelsiusTemp(event) {
+  event.preventDefault();
+  fahrenheitLink.classList.remove("active");
+  celsiusLink.classList.add("active");
+  let celsiusElement = document.querySelector("#current-degrees-temp");
+  celsiusElement.innerHTML = Math.round(celsiusTemperature);
+}
+
+let celsiusTemperature = null;
+
 let searchLocation = document.querySelector("#search-location");
 searchLocation.addEventListener("submit", handleSubmit);
 
 let currentPosition = document.querySelector("#search-current-position");
 currentPosition.addEventListener("click", searcCurrentPosition);
+
+let fahrenheitLink = document.querySelector("#fahrenheit-link");
+fahrenheitLink.addEventListener("click", showfahrenheitTemp);
+
+let celsiusLink = document.querySelector("#celsius-link");
+celsiusLink.addEventListener("click", showCelsiusTemp);
 
 searchCity("Siaya");
