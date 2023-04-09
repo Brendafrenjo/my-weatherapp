@@ -1,10 +1,12 @@
-function formattedTime(date) {
-  let hours = now.getHours();
+function formattedTime(timestamp) {
+  let date = new Date(timestamp);
+
+  let hours = date.getHours();
   if (hours < 10) {
     hours = `0${hours}`;
   }
 
-  let minutes = now.getMinutes();
+  let minutes = date.getMinutes();
   if (minutes < 10) {
     minutes = `0${minutes}`;
   }
@@ -18,36 +20,29 @@ function formattedTime(date) {
     "Friday",
     "Saturday",
   ];
-  let day = days[now.getDay()];
+  let day = days[date.getDay()];
 
   return `${day} ${hours}:${minutes}`;
 }
-
-let now = new Date();
-
-let currentTime = document.querySelector("#current-time");
-
-currentTime.innerHTML = formattedTime(now);
 
 function showTemperature(response) {
   let cityInput = document.querySelector("#search-city");
   cityInput.innerHTML = response.data.name;
 
   let degreesTemperature = document.querySelector("#current-degrees-temp");
-  let temperature = Math.round(response.data.main.temp);
-  degreesTemperature.innerHTML = temperature;
+  degreesTemperature.innerHTML = Math.round(response.data.main.temp);
 
   let weatherDescription = document.querySelector("#weather-description");
-  let description = response.data.weather[0].description;
-  weatherDescription.innerHTML = description;
+  weatherDescription.innerHTML = response.data.weather[0].description;
 
   let weatherHumidity = document.querySelector("#weather-humidity");
-  let humidity = response.data.main.humidity;
-  weatherHumidity.innerHTML = `Humidy: ${humidity}%`;
+  weatherHumidity.innerHTML = `Humidy: ${response.data.main.humidity}%`;
 
   let weatherWind = document.querySelector("#weather-wind");
-  let wind = response.data.wind.speed;
-  weatherWind.innerHTML = `Wind: ${wind}km/h`;
+  weatherWind.innerHTML = `Wind: ${Math.round(response.data.wind.speed)}km/h`;
+
+  let currentTime = document.querySelector("#current-time");
+  currentTime.innerHTML = formattedTime(response.data.dt * 1000);
 }
 
 function searchCity(city) {
