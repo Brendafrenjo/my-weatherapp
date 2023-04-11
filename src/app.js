@@ -25,6 +25,40 @@ function formattedTime(timestamp) {
   return `${day} ${hours}:${minutes}`;
 }
 
+function showForecast() {
+  let forecastElement = document.querySelector("#forecast");
+
+  let forecastHTML = `<div class="row">`;
+  days = ["Mon", "Tue", "Wed", "Thu"];
+  days.forEach(function (day) {
+    forecastHTML =
+      forecastHTML +
+      `
+        <div class="col-2">
+                <div class="card" style="width: 4.8rem">
+                  <div class="card-body">
+                    <h5 class="card-title weather-forecast-date">${day}</h5>
+                    <p class="card-text">
+                      <img
+                        src="https://openweathermap.org/img/wn/04d@2x.png"
+                        alt="Icon"
+                        width="36"
+                      />
+                    </p>
+                    <div class="weather-forecast-temperature">
+                      <span class="weather-forecast-temperature-max">27° </span
+                      ><span class="weather-forecast-temperature-min">20°</span>
+                    </div>
+                  </div>
+              </div>
+            </div>
+      `;
+  });
+
+  forecastHTML = forecastHTML + `</div>`;
+  forecastElement.innerHTML = forecastHTML;
+}
+
 function showTemperature(response) {
   let cityInput = document.querySelector("#search-city");
   let degreesTemperature = document.querySelector("#current-degrees-temp");
@@ -109,3 +143,4 @@ let celsiusLink = document.querySelector("#celsius-link");
 celsiusLink.addEventListener("click", showCelsiusTemp);
 
 searchCity("Siaya");
+showForecast();
