@@ -112,15 +112,6 @@ small {
   bottom: -8px;
 }
 
-.weather-temperature .active {
-  color: black;
-  cursor: default;
-}
-
-.weather-temperature .active:hover {
-  text-decoration: none;
-}
-
 .weather-forecast {
   margin-top: 10px;
   text-align: center;
@@ -134,11 +125,6 @@ small {
 .weather-forecast-date,
 .weather-forecast-temperature-min {
   opacity: 0.6;
-}
-
-#celsius-link,
-#fahrenheit-link {
-  text-decoration: none;
 }
 
 #weather-description {

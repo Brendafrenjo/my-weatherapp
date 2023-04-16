@@ -56,7 +56,7 @@ function showForecast(response) {
                           forecastDay.weather[0].icon
                         }@2x.png"
                         alt="Icon"
-                        width="36"
+                        width="42"
                       />
                     </p>
                     <div class="weather-forecast-temperature">
@@ -64,7 +64,7 @@ function showForecast(response) {
                         forecastDay.temp.max
                       )}°   </span
                       ><span class="weather-forecast-temperature-min">${Math.round(
-                        forecastDay.temp.max
+                        forecastDay.temp.min
                       )}°</span>
                     </div>
                   </div>
@@ -125,6 +125,42 @@ function handleSubmit(event) {
   searchCity(city);
 }
 
+function searchFistCity(event) {
+  event.preventDefault();
+  let apiKey = `93d43dfe3b4a950e5b187e5dc313705e`;
+  let apiEndpoint = `https://api.openweathermap.org/data/2.5/weather?`;
+  let apiUrl = `${apiEndpoint}q=Kampala&appid=${apiKey}&units=metric`;
+
+  axios.get(apiUrl).then(showTemperature);
+}
+
+function searchSecondCity(event) {
+  event.preventDefault();
+  let apiKey = `93d43dfe3b4a950e5b187e5dc313705e`;
+  let apiEndpoint = `https://api.openweathermap.org/data/2.5/weather?`;
+  let apiUrl = `${apiEndpoint}q=Dodoma&appid=${apiKey}&units=metric`;
+
+  axios.get(apiUrl).then(showTemperature);
+}
+
+function searchThirdCity(event) {
+  event.preventDefault();
+  let apiKey = `93d43dfe3b4a950e5b187e5dc313705e`;
+  let apiEndpoint = `https://api.openweathermap.org/data/2.5/weather?`;
+  let apiUrl = `${apiEndpoint}q=Kigali&appid=${apiKey}&units=metric`;
+
+  axios.get(apiUrl).then(showTemperature);
+}
+
+function searchFourthCity(event) {
+  event.preventDefault();
+  let apiKey = `93d43dfe3b4a950e5b187e5dc313705e`;
+  let apiEndpoint = `https://api.openweathermap.org/data/2.5/weather?`;
+  let apiUrl = `${apiEndpoint}q=Addis Ababa&appid=${apiKey}&units=metric`;
+
+  axios.get(apiUrl).then(showTemperature);
+}
+
 function showPositionWeather(position) {
   latitude = position.coords.latitude;
   longitude = position.coords.longitude;
@@ -143,5 +179,17 @@ searchLocation.addEventListener("submit", handleSubmit);
 
 let currentPosition = document.querySelector("#search-current-position");
 currentPosition.addEventListener("click", searcCurrentPosition);
+
+let firstCity = document.querySelector("#city-one");
+firstCity.addEventListener("click", searchFistCity);
+
+let secondCity = document.querySelector("#city-two");
+secondCity.addEventListener("click", searchSecondCity);
+
+let thirdCity = document.querySelector("#city-three");
+thirdCity.addEventListener("click", searchThirdCity);
+
+let fourthCity = document.querySelector("#city-four");
+fourthCity.addEventListener("click", searchFourthCity);
 
 searchCity("Siaya");
