@@ -138,35 +138,10 @@ function searcCurrentPosition(event) {
   navigator.geolocation.getCurrentPosition(showPositionWeather);
 }
 
-function showfahrenheitTemp(event) {
-  event.preventDefault();
-  fahrenheitLink.classList.add("active");
-  celsiusLink.classList.remove("active");
-  let celsiusElement = document.querySelector("#current-degrees-temp");
-  let fahrenheitTemperature = (celsiusTemperature * 9) / 5 + 32;
-  celsiusElement.innerHTML = Math.round(fahrenheitTemperature);
-}
-
-function showCelsiusTemp(event) {
-  event.preventDefault();
-  fahrenheitLink.classList.remove("active");
-  celsiusLink.classList.add("active");
-  let celsiusElement = document.querySelector("#current-degrees-temp");
-  celsiusElement.innerHTML = Math.round(celsiusTemperature);
-}
-
-let celsiusTemperature = null;
-
 let searchLocation = document.querySelector("#search-location");
 searchLocation.addEventListener("submit", handleSubmit);
 
 let currentPosition = document.querySelector("#search-current-position");
 currentPosition.addEventListener("click", searcCurrentPosition);
-
-let fahrenheitLink = document.querySelector("#fahrenheit-link");
-fahrenheitLink.addEventListener("click", showfahrenheitTemp);
-
-let celsiusLink = document.querySelector("#celsius-link");
-celsiusLink.addEventListener("click", showCelsiusTemp);
 
 searchCity("Siaya");
