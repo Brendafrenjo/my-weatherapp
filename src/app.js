@@ -25,11 +25,12 @@ function formattedTime(timestamp) {
   return `${day} ${hours}:${minutes}`;
 }
 
-function showForecast() {
+function showForecast(response) {
+  console.log(response.data.daily);
   let forecastElement = document.querySelector("#forecast");
 
   let forecastHTML = `<div class="row">`;
-  days = ["Mon", "Tue", "Wed", "Thu"];
+  days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
   days.forEach(function (day) {
     forecastHTML =
       forecastHTML +
@@ -59,6 +60,14 @@ function showForecast() {
   forecastElement.innerHTML = forecastHTML;
 }
 
+function retrieveForecast(coordinates) {
+  let apiKey = `93d43dfe3b4a950e5b187e5dc313705e`;
+  let apiEndNote = `https://api.openweathermap.org/data/2.5/onecall?`;
+  let apiUrl = `${apiEndNote}lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
+  axios.get(apiUrl).then(showForecast);
+  console.log(apiUrl);
+}
+
 function showTemperature(response) {
   let cityInput = document.querySelector("#search-city");
   let degreesTemperature = document.querySelector("#current-degrees-temp");
@@ -81,10 +90,12 @@ function showTemperature(response) {
     `https://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
   );
   iconElement.setAttribute("alt", response.data.weather[0].description);
+
+  retrieveForecast(response.data.coord);
 }
 
 function searchCity(city) {
-  let apiKey = `c49ac0d4966a15e494a3ad92063a514f`;
+  let apiKey = `93d43dfe3b4a950e5b187e5dc313705e`;
   let apiEndpoint = `https://api.openweathermap.org/data/2.5/weather?`;
   let apiUrl = `${apiEndpoint}q=${city}&appid=${apiKey}&units=metric`;
 
@@ -98,12 +109,11 @@ function handleSubmit(event) {
 }
 
 function showPositionWeather(position) {
-  let latitude = position.coords.latitude;
-  let longitude = position.coords.longitude;
-  let apiKey = `c49ac0d4966a15e494a3ad92063a514f`;
+  latitude = position.coords.latitude;
+  longitude = position.coords.longitude;
+  let apiKey = `93d43dfe3b4a950e5b187e5dc313705e`;
   let apiEndpoint = `https://api.openweathermap.org/data/2.5/weather?`;
   let apiUrl = `${apiEndpoint}lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=metric`;
-
   axios.get(apiUrl).then(showTemperature);
 }
 
@@ -143,4 +153,3 @@ let celsiusLink = document.querySelector("#celsius-link");
 celsiusLink.addEventListener("click", showCelsiusTemp);
 
 searchCity("Siaya");
-showForecast();
